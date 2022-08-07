@@ -4,7 +4,7 @@ services:
   mysql:
     # For Mac M1 users please use this image: arm64v8/mysql:8-oracle
     # For other OS: mysql:8-debian
-    image: arm64v8/mysql:8-oracle
+    image: mysql:8-debian
     ports:
       - 3306:3306
     environment:
