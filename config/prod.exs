@@ -47,6 +47,11 @@ config :trc,
     }
   }
 
+config :trc, :environment, :prod
+
+config :trc,
+    redis_url: "redis://redis:6379/3"
+
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key

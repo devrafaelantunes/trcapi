@@ -36,9 +36,6 @@ config :trc,
     }
   }
 
-config :trc,
-  redis_url: "redis://redis:6379/3"
-
 # Swoosh API client is needed for adapters other than SMTP.
 config :swoosh, :api_client, false
 

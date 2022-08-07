@@ -41,14 +41,19 @@ The `Consumer` will store the data into the `dataset_entries` table. As soon as 
   * Each consumer when instantiated has it own AMQP connection instead of having a shared connection with all the consumers or a connection pool with shared among the cluser.
   * This can increase the app performance because if the consumers shared a connection, all the inserts would need to be serialized on that connection, possibly becoming a bottleneck. I chose to use a dedicated connection to prevent that from happening even though it uses more memory. 
 
-## How to run the application
+## How to run the application inside Docker
 
 - `docker-compouse up --build`
 - The API will listen to port `4000` and will serve `/api/datasets` endpoint.
 
-## How to run unit tests
+## How to run unit tests and the application without Docker
 
-- use `mix test`
+- `docker-compose -f docker-compose-dev.yaml up -d`
+- `mix ecto.create`
+- `mix ecto.migrate`
+
+- use `mix test` to run the tests
+- use `iex -S mix phx.server` to run the application
 
 ## How to use the API
 
@@ -74,3 +79,6 @@ The `Consumer` will store the data into the `dataset_entries` table. As soon as 
 
 - MySQL docker is not running:
   * Please check the image on the `docker-compose-yaml` file, if you are a M1 user, you must modify it.
+
+- Docker exits with error 126
+  * Run `chmod +x rel/overlays/bin/server`

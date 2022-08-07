@@ -7,7 +7,7 @@ defmodule Trc.Redis do
   @type k :: String.t()
   @type v :: String.t()
 
-  @redis_url Application.compile_env!(:trc, :redis_url)
+  @redis_url Application.get_env(:trc, :redis_url)
 
   # Expires the data in one day
   @expire_interval 86_400

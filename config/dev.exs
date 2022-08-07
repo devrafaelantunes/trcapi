@@ -26,6 +26,11 @@ config :trc, TrcWeb.Endpoint,
   secret_key_base: "VUHYBPxqUYiXXiDsWVBaBTTH4fMYFJwszx8vXLpapQoDD2y54eNTzxmvBqCXtwou",
   watchers: []
 
+config :trc, :environment, :dev
+
+config :trc,
+    redis_url: "redis://localhost:6379/3"
+
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed

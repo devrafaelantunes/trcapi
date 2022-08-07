@@ -15,10 +15,17 @@ defmodule Trc.AMQP.Queue do
   @spec connect() :: {:ok, channel()}
   def connect() do
     # Opens a new connection to an AMQP broker
-    {:ok, connection} = AMQP.Connection.open("amqp://guest:guest@rabbitmq")
+    if Application.get_env(:trc, :environment) == :prod do
+      {:ok, connection} = AMQP.Connection.open("amqp://guest:guest@rabbitmq")
 
-    # Opens a new channel inside the connection
-    AMQP.Channel.open(connection)
+      # Opens a new channel inside the connection
+      AMQP.Channel.open(connection)
+    else
+      {:ok, connection} = AMQP.Connection.open()
+
+      # Opens a new channel inside the connection
+      AMQP.Channel.open(connection)
+    end
   end
 
   @doc """

@@ -25,6 +25,9 @@ config :trc,
   queue_backend: Trc.AMQP.QueueMock,
   file_io: Trc.Publisher.FileIOMock
 
+config :trc,
+  redis_url: "redis://localhost:6379/3"
+
 # Print only warnings and errors during test
 config :logger, level: :info
 
