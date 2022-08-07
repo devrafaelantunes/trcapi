@@ -1,0 +1,1 @@
+call "%~dp0\trc" eval Trc.Release.migrate

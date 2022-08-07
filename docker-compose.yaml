@@ -1,0 +1,51 @@
+version: "3"
+
+services:
+  mysql:
+    # For Mac M1 users please use this image: arm64v8/mysql:8-oracle
+    # For other OS: mysql:8-debian
+    image: arm64v8/mysql:8-oracle
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: trc_dev
+      MYSQL_ROOT_PASSWORD: root
+
+  rabbitmq:
+    image: rabbitmq:3.10.6
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASSWORD: guest
+      RABBITMQ_DEFAULT_VHOST: /
+    ports:
+      - 5671:5671
+      - 5672:5672
+
+  redis:
+    image: redis
+    command: redis-server
+    hostname: redis
+    ports:
+      - 6379:6379
+
+  rabbitmq-management:
+    image: rabbitmq:management
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASSWORD: guest
+      RABBITMQ_DEFAULT_VHOST: /
+    ports:
+      - 15671:15671
+      - 15672:15672
+
+  trc:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    depends_on:
+      - mysql
+      - rabbitmq
+      - redis
+    ports:
+      - 4000:4000
+
